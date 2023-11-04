@@ -57,7 +57,8 @@ git fetch
 git branch <Nome da nova Branch>
 ```
 * Este comando cria uma nova branch.
-* Apos a criação da nova branch você continua na branch atual. Para mover-se a nova branch utilize ```git checkout <Nome da Branch desejada```.
+* Apos a criação da nova branch você continua na branch atual.
+* Para mover-se a nova branch utilize ```git checkout <Nome da Branch desejada```.
 
 ```
 git branch --list
