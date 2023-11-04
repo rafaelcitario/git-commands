@@ -80,3 +80,8 @@ git log
 ```
 * Este comando retorna todas modificações adicionadas ```git add``` e commitadas ```git commit```.
 * Você pode modificar a forma de visualização do conteúdo retornado utilizando ```git log --oneline```. Esta opção retorna o conteúdo em apenas uma unica linha.
+
+```
+git blame <Arquivo.extensão>
+```
+* Este comando retorna o responsável por comits feitos no projeto
