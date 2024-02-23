@@ -85,3 +85,9 @@ git log
 git blame <Arquivo.extensão>
 ```
 * Este comando retorna o responsável por comits feitos no projeto
+
+```
+git log --oneline // este comando retorna os ultimos comits resumidos em uma linha.
+git revert [cole aqui a hash do commit desejado]
+```
+* Este comando revertera a menssagem do commit escolhido
