@@ -1,93 +1,256 @@
-# Comandos importantes do Git
+# 📌 Comandos Essenciais do Git (Guia Rápido para Júnior)
 
-```
+### Iniciar repositório
+
+```bash
 git init
 ```
-* Este comando inicia um repositório em sua maquina.
 
-```
-git diff <Arquivo.extensão>
-```
-* Este comando mostra todas as modificações realizadas no arquivo.
-  
-```
-git diff *
-```
-* Este comando mostra todas as modificações realizadas em todos os arquivos.
+Inicia um novo repositório Git local na pasta atual. Cria a pasta oculta `.git/`.
 
+---
+
+### Ver diferenças
+
+```bash
+git diff <arquivo.extensão>
 ```
+
+Mostra as modificações realizadas em **um arquivo específico** que ainda não foram adicionadas ao *stage*.
+
+```bash
+git diff
+```
+
+Mostra todas as modificações realizadas em todos os arquivos **ainda não adicionados ao stage**.
+
+```bash
+git diff --staged
+```
+
+Mostra as modificações que já foram adicionadas ao *stage* e ainda não foram commitadas.
+
+```bash
 git diff origin/<branch>
 ```
-* Este comando mostra todas as modificações realizadas na brunch selecionada.
 
-```
-git add <Arquivo.extensão>
-```
-* Este comando adiciona o arquivo modificado ao "Stage".
-* Arquivos no Stage, estão prontos para serem comitados.
+Compara seu código local com a branch remota informada.
 
-```
-git restore <Arquivo.extensão>
-```
-* Este comando deleta todas as modifações que você fez no arquivo.
+---
 
-```
-git restore *
-```
-* Deleta todas as modificações que você realizou em todos os arquivos modificados.
+### Adicionar arquivos ao Stage
 
+```bash
+git add <arquivo.extensão>
 ```
-git restore --staged <Arquivo.extensão>
-```
-* Este comando retorna um arquivo que estava em "Staged" para "Modificado".
-* Sendo necessario realizar ```git add <Arquivo.extensão>``` novamente para depois comitar.
 
+Adiciona o arquivo ao *stage*. Arquivos no stage estão prontos para serem commitados.
+
+```bash
+git add .
 ```
+
+Adiciona **todos os arquivos modificados** ao *stage*.
+
+---
+
+### Descartar mudanças
+
+```bash
+git restore <arquivo.extensão>
+```
+
+Descarta todas as modificações feitas em um arquivo que **ainda não foi adicionado ao stage**.
+
+```bash
+git restore .
+```
+
+Descarta modificações em **todos os arquivos não stageados**.
+
+```bash
+git restore --staged <arquivo.extensão>
+```
+
+Remove o arquivo do *stage*, voltando ao estado de **modificado**.
+
+---
+
+### Commitar mudanças
+
+```bash
+git commit -m "Mensagem do commit"
+```
+
+Registra as alterações adicionadas ao *stage* com uma mensagem descritiva.
+
+```bash
+git commit -am "Mensagem"
+```
+
+Adiciona **e** commita arquivos que já estavam sendo rastreados (não pega arquivos novos).
+
+---
+
+### Atualizar repositório local
+
+```bash
 git pull
 ```
-* Este comando atualiza AUTOMATICAMENTE seus arquivos locais, com o que foi adicionado em seu repositório na nuvem ( GitHub ).
-  
-```
-git fetch 
-```
-* Este comando realiza o download de todos os arquivos modificados que estão atualmente em seu repositório na nuvem ( Github ) para sua maquina.
-* Este comando não é igual a ```git pull```, após o uso deste comando, você pode utilizar ```git diff origin/<branch>``` para visualizar quais modificações estão faltando no arquivo atual localizado em sua maquina.
 
-```
-git branch <Nome da nova Branch>
-```
-* Este comando cria uma nova branch.
-* Apos a criação da nova branch você continua na branch atual.
-* Para mover-se a nova branch utilize ```git checkout <Nome da Branch desejada```.
+Baixa e mescla automaticamente alterações do repositório remoto para o local.
 
+```bash
+git fetch
 ```
+
+Baixa as alterações do repositório remoto, mas não mescla.
+Útil para inspecionar antes de aplicar, junto com `git diff`.
+
+---
+
+### Trabalhando com Branches
+
+```bash
+git branch <nome-da-branch>
+```
+
+Cria uma nova branch.
+
+```bash
+git checkout <nome-da-branch>
+```
+
+Troca para a branch desejada.
+
+```bash
+git checkout -b <nome-da-branch>
+```
+
+Cria e já troca para a nova branch.
+
+```bash
 git branch --list
 ```
-* Este comando lista todas as branches existentes
 
-```
-git branch -d <Nome da Branch>
-```
-* Este comando deleta a branch desejada.
+Lista todas as branches locais.
 
+```bash
+git branch -d <nome-da-branch>
 ```
-git checkout <Nome da Branch desejada>
-```
-* Este comando seleciona a branch que você deseja utilizar.
 
+Deleta uma branch local já mesclada.
+
+```bash
+git push origin --delete <nome-da-branch>
 ```
+
+Deleta uma branch remota.
+
+---
+
+### Histórico de commits
+
+```bash
 git log
 ```
-* Este comando retorna todas modificações adicionadas ```git add``` e commitadas ```git commit```.
-* Você pode modificar a forma de visualização do conteúdo retornado utilizando ```git log --oneline```. Esta opção retorna o conteúdo em apenas uma unica linha.
 
-```
-git blame <Arquivo.extensão>
-```
-* Este comando retorna o responsável por comits feitos no projeto
+Lista todos os commits.
 
+```bash
+git log --oneline
 ```
-git log --oneline // este comando retorna os ultimos comits resumidos em uma linha.
-git revert [cole aqui a hash do commit desejado]
+
+Lista commits de forma resumida em uma linha.
+
+```bash
+git log --graph --oneline --decorate
 ```
-* Este comando revertera a menssagem do commit escolhido
+
+Mostra histórico com visualização gráfica de branches.
+
+---
+
+### Reverter alterações
+
+```bash
+git revert <hash>
+```
+
+Cria um novo commit que desfaz as alterações de um commit específico.
+
+```bash
+git reset --soft <hash>
+```
+
+Volta o histórico até um commit, **mantendo alterações no stage**.
+
+```bash
+git reset --mixed <hash>
+```
+
+Volta o histórico até um commit, **mantendo alterações no diretório de trabalho** (estado "modificado").
+
+```bash
+git reset --hard <hash>
+```
+
+Volta ao commit escolhido **apagando todas as alterações posteriores** (cuidado!).
+
+---
+
+### Quem mudou o quê?
+
+```bash
+git blame <arquivo.extensão>
+```
+
+Mostra linha a linha quem fez cada alteração em um arquivo.
+
+---
+
+### Enviar alterações para o remoto
+
+```bash
+git push origin <branch>
+```
+
+Envia commits da branch local para a branch remota.
+
+```bash
+git push -u origin <branch>
+```
+
+Envia commits e **configura a branch remota como padrão** para futuros push/pull.
+
+---
+
+### Clonar repositório
+
+```bash
+git clone <url>
+```
+
+Copia um repositório remoto para sua máquina.
+
+---
+
+### Status do repositório
+
+```bash
+git status
+```
+
+Mostra a situação atual dos arquivos (modificados, stageados, não rastreados).
+
+---
+
+# ⚡ Resumo de sobrevivência
+
+1. `git status` → sempre olhe antes de agir.
+2. `git add .` + `git commit -m "msg"` → salvar mudanças.
+3. `git pull` → atualizar.
+4. `git push` → enviar.
+5. Trabalhe em branches → nunca faça tudo na `main`.
+
+---
